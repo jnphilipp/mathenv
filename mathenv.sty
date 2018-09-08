@@ -1,0 +1,193 @@
+% Copyright (C) 2018 Nathanael Philipp (jnphilipp) <mail@jnphilipp.org>
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+\ProvidesPackage{mathenv}
+
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{datetime}
+\usepackage{framed}
+\usepackage{graphicx}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing,calc,positioning,matrix}
+
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+%                                                 %
+%                     Logos                       %
+%                                                 %
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+\newsavebox{\logodefinition}
+\savebox{\logodefinition}{
+  \begin{tikzpicture}
+    \clip (-0.2pt,-0.2pt) rectangle ($(0.45,0.45)+(0.2pt,0.2pt)$);
+    \filldraw[fill=yellow!30, draw, rounded corners=1pt] (0,0) rectangle (0.45,0.45);
+    \fill (0.225,0.225) circle (0.1);
+  \end{tikzpicture}
+}
+
+
+\newsavebox{\logosatz}
+\savebox{\logosatz}{
+  \begin{tikzpicture}
+    \clip (-0.2pt,-0.2pt) rectangle ($(0.45,0.45)+(0.2pt,0.2pt)$);
+    \filldraw[fill=green!20, draw, rounded corners=1pt] (0,0) rectangle (0.45,0.45);
+    \draw (0,0.225) node[right=+1pt] {\textbf{!}};
+  \end{tikzpicture}
+}
+
+
+\newsavebox{\logofolgerung}
+\savebox{\logofolgerung}{
+  \begin{tikzpicture}
+    \clip (-0.2pt,-0.2pt) rectangle ($(0.45,0.45)+(0.2pt,0.2pt)$);
+\filldraw[fill=orange!50, draw, rounded corners=1pt] (0,0) rectangle (0.45,0.45);
+    \draw (0,0.200) node[right=-4pt] {$\Rightarrow$};
+  \end{tikzpicture}
+}
+
+
+\newsavebox{\logolemma}
+\savebox{\logolemma}{
+  \begin{tikzpicture}
+    \clip (-0.2pt,-0.2pt) rectangle ($(0.45,0.45)+(0.2pt,0.2pt)$);
+    \filldraw[fill=white, draw=gray, rounded corners=1pt] (0,0) rectangle (0.45,0.45);
+    \draw (0,0.225) node[right=+1pt] {\textbf{?}};
+  \end{tikzpicture}
+}
+
+
+\newsavebox{\logobeweis}
+\savebox{\logobeweis}{
+  \begin{tikzpicture}
+    \clip (-0.2pt,-0.2pt) rectangle ($(0.45,0.45)+(0.2pt,0.2pt)$);
+    \filldraw[fill=blue!20, draw, rounded corners=1pt] (0,0) rectangle (0.45,0.45);
+    \draw[line width=1.2pt] (0.125,0.125) rectangle (0.325,0.325);
+  \end{tikzpicture}
+}
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+%                                                 %
+%                     Styles                      %
+%                                                 %
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+\newtheoremstyle{sdefinition}{2ex}{2.5ex}{\normalfont}{-0.8em}{\normalfont\bfseries}
+  {:}{\newline}{\thmname{
+  \begin{picture}(0,0)(50,0)
+    \usebox{\logodefinition}
+  \end{picture}
+  #1} \thmnumber{#2}\textnormal{\thmnote{ (#3)}}}
+
+
+\newtheoremstyle{ssatz}{2ex}{2.5ex}{\normalfont}{-0.8em}{\normalfont\bfseries}
+  {:}{\newline}{\thmname{
+  \begin{picture}(0,0)(50,2)
+    \usebox{\logosatz}
+  \end{picture}
+  #1}
+  \thmnumber{#2}\textnormal{\thmnote{ (#3)}}}
+
+
+\newtheoremstyle{sfolgerung}{2ex}{2.5ex}{\normalfont}{-0.8em}{\normalfont\bfseries}
+  {:}{\newline}{\thmname{
+  \begin{picture}(0,0)(50,1.5)
+    \usebox{\logofolgerung}
+  \end{picture}
+  #1} \thmnumber{#2}\textnormal{\thmnote{ (#3)}}}
+
+
+\newtheoremstyle{slemma}{2ex}{2.5ex}{\normalfont}{-0.8em}{\normalfont\bfseries}%
+  {:}{\newline}{\thmname{
+  \begin{picture}(0,0)(50,1.5)
+    \usebox{\logolemma}
+  \end{picture}
+  #1}
+  \thmnumber{#2}\textnormal{\thmnote{ (#3)}}}
+
+
+\newtheoremstyle{sbeweis}{2ex}{2.5ex}{\normalfont}{-0.8em}{\normalfont\bfseries}%
+  {:}{\newline}{\thmname{
+  \begin{picture}(0,0)(50,1.5)
+    \usebox{\logobeweis}
+  \end{picture}
+  #1}
+  \thmnumber{#2}\textnormal{\thmnote{ (#3)}}}
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+%                                                 %
+%                    Theorems                     %
+%                                                 %
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+\theoremstyle{sdefinition}
+\newtheorem{tdefinition}{Definition}[section]
+\theoremstyle{ssatz}
+\newtheorem{tsatz}{Satz}[section]
+\theoremstyle{sfolgerung}
+\newtheorem{tfolgerung}{Folgerung}[section]
+\theoremstyle{slemma}
+\newtheorem{tlemma}{Lemma}[section]
+\theoremstyle{sbeweis}
+\newtheorem{tbeweis}{Beweis}[section]
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+%                                                 %
+%                  Environment                    %
+%                                                 %
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+\newenvironment{fshaded}{\def\FrameCommand{\fcolorbox{framecolor}{shadecolor}}
+  \MakeFramed{\FrameRestore}}{\endMakeFramed}
+
+\newenvironment{definition}[1][]{\definecolor{shadecolor}{rgb}{1,1,.7}%
+\definecolor{framecolor}{rgb}{0,0,0}%
+\begin{fshaded}\begin{tdefinition}[#1]}{\end{tdefinition}\vspace{-1em}\end{fshaded}}
+
+\newenvironment{satz}[1][]{\definecolor{shadecolor}{rgb}{.8,1,.8}%
+\definecolor{framecolor}{rgb}{0,0,0}
+\begin{fshaded}\begin{tsatz}[#1]}{\end{tsatz}\vspace{-1em}\end{fshaded}}
+
+\newenvironment{folgerung}[1][]{\definecolor{shadecolor}{rgb}{1,.75,.5}%
+\definecolor{framecolor}{rgb}{0,0,0}
+\begin{fshaded}\begin{tfolgerung}[#1]}{\end{tfolgerung}\vspace{-1em}\end{fshaded}}
+
+\newenvironment{lemma}[1][]{\definecolor{shadecolor}{rgb}{1,1,1}%
+\definecolor{framecolor}{rgb}{.6,.6,.6}%
+\begin{fshaded}\begin{tlemma}[#1]}{\end{tlemma}\vspace{-1em}\end{fshaded}}
+
+\newenvironment{beweis}[1][]{\definecolor{shadecolor}{rgb}{.93,.93,1}%
+\definecolor{framecolor}{rgb}{0,0,.6}%
+\begin{fshaded}\begin{tbeweis}[#1]}{\end{tbeweis}\vspace{-1em}\end{fshaded}}
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+%                                                 %
+%                      refs                       %
+%                                                 %
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+\newcommand{\refdefinition}[1]{\hyperref[#1]{Definition \ref*{#1}}}
+\newcommand{\refsatz}[1]{\hyperref[#1]{Satz \ref*{#1}}}
+\newcommand{\reffolgerung}[1]{\hyperref[#1]{Folgerung \ref*{#1}}}
+\newcommand{\reflemma}[1]{\hyperref[#1]{Lemma \ref*{#1}}}
+\newcommand{\refbeweis}[1]{\hyperref[#1]{Beweis \ref*{#1}}}
